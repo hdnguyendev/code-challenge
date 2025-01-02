@@ -38,11 +38,11 @@ Make sure the backend server is running and accessible. Update the API endpoint 
 
 ## Building for Production
 
-To build the application for production, run:
+To build the application for production: 
 
-    ```sh
-    npm run build
-    ```
+```sh
+npm run build
+```
 
 ## Project Structure
 
