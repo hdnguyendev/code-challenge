@@ -3,11 +3,19 @@ import { User } from "../models/user";
 export let users: User[] = [
   {
     id: 1,
-    name: "Kyo Ho",
+    name: "Nguyen Ho Dang",
     email: "hdnguyen.dev@gmail.com",
     phone: "0123456789",
     address: "DA NANG",
     avatar: "https://i.pravatar.cc/150?img=1",
+  },  
+  {
+    id: 2,
+    name: "An Le Thi Binh",
+    email: "annltb.dev@gmail.com",
+    phone: "0123456789",
+    address: "DA NANG",
+    avatar: "https://i.pravatar.cc/150?img=2",
   },
 ];
 
