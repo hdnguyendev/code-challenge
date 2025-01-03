@@ -2,10 +2,7 @@ import { createApp } from 'vue'
 import './style.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap"
-
 import App from './App.vue'
-
-
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 import HomeView from './views/HomeView.vue'

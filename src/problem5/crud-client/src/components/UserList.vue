@@ -1,6 +1,17 @@
 <template>
     <div class="container mt-4">
-        <router-link to="/add" class="btn btn-primary mb-4">Add New User</router-link>
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>User List</h2>
+            <router-link to="/add" class="btn btn-primary">Add New User</router-link>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Search user..." v-model="searchQuery"
+                    @keyup.enter="fetchUsers(1)" />
+            </div>
+        </div>
+
         <div v-if="loading" class="text-center">
             <div class="spinner-border text-primary" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -10,6 +21,7 @@
             <div v-if="noFound" class="alert alert-warning text-center">
                 No users found!
             </div>
+
             <div v-if="users" class="row">
                 <div v-for="user in users" :key="user.id" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
                     <div class="card">
@@ -61,6 +73,7 @@ export default {
             users: [],
             loading: true,
             noFound: false,
+            searchQuery: '',
             meta: {
                 total: 0,
                 page: 1,
@@ -78,7 +91,7 @@ export default {
         async fetchUsers(page = 1) {
             this.loading = true;
             try {
-                const response = await getUsers(page, this.meta.limit);
+                const response = await getUsers(page, this.meta.limit, this.searchQuery);
                 this.users = response.data.data;
                 this.meta.total = response.data.meta.total;
                 this.meta.page = response.data.meta.page;

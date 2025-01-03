@@ -51,14 +51,29 @@ export const getUsers = (req: Request, res: Response) => {
     let startIndex = (page - 1) * limit;
     let endIndex = page * limit;
 
+    let search = req.query.search as string;
+
+    let filteredUsers = [...users];
+
+    if (search) {
+        filteredUsers = users.filter((user) => {
+            return (
+                user.name.toLowerCase().includes(search.toLowerCase()) ||
+                user.email.toLowerCase().includes(search.toLowerCase()) ||
+                user.phone.toLowerCase().includes(search.toLowerCase()) ||
+                user.address.toLowerCase().includes(search.toLowerCase())
+            );
+        });
+    }
+
     const meta = {
-        total: users.length,
+        total: filteredUsers.length,
         page,
         limit,
-        totalPages: Math.ceil(users.length / limit),
+        totalPages: Math.ceil(filteredUsers.length / limit),
     };
 
-    let resultUsers = users.slice(startIndex, endIndex);
+    let resultUsers = filteredUsers.slice(startIndex, endIndex);
 
     res.status(200).json({
         "message": "Users retrieved",
